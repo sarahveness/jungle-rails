@@ -44,6 +44,7 @@
             <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
           <% end %>
         </li>
+        <% if logged_in? %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
@@ -51,9 +52,22 @@
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><%= link_to signup_users_path do %>
+            <li><%= link_to current_user do %>
+            <%= fa_icon "cog" %> My Account
+             <% end %></li>
+             <li><%= link_to login_path, method: :delete do %>
+            <%= fa_icon "cog" %> Log Out
+            <% end %>
+             </li>
+
+             <% else %>
+             <li><%= link_to signup_path do %>
             <%= fa_icon "cog" %> Register
              <% end %></li>
+              <li><%= link_to login_path do %>
+              <%= fa_icon "cog" %> Login
+             <% end %></li>
+             <% end %>
           </ul>
         </li>
       </ul>
