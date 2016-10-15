@@ -39,12 +39,15 @@
 
            <div class="col-sm-6">
           <dl class="dl-vertical">
-          <dt>Review</dt>
+          <dt>Product Reviews</dt>
+          <p>
           <% @product.reviews.each do |review| %>
+          <dt>Review</dt>
           <dd><%= review.description %></dd>
           <p>
           <dt>Rating</dt>
           <dd><%= review.rating %></dd>
+          <p>
           <% end %>
         </dl>
       </div>
