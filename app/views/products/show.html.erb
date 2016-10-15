@@ -22,9 +22,28 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+          </dl>
+      </div>
+<p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+  <h5>Leave a Review</h5>
+    <%= form_for [@product, @review] do |f| %>
+       <%= f.label :description %>
+      <%= f.text_field :description, class: 'form-control' %>
+      <%= f.label :rating %>
+      <%= select_tag(:rating, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]])) %>
+      <%= submit_tag("Submit!") %>
+    <% end %>
+</div>
+
+           <div class="col-sm-6">
+          <dl class="dl-vertical">
           <dt>Review</dt>
           <% @product.reviews.each do |review| %>
           <dd><%= review.description %></dd>
+          <p>
+          <dt>Rating</dt>
           <dd><%= review.rating %></dd>
           <% end %>
         </dl>
