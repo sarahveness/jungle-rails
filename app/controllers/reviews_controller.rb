@@ -4,17 +4,10 @@ class ReviewsController < ApplicationController
     @review = Review.new
   end
 
-  def show
-    @review = Review.find(params[:id])
-  end
-
   def create
     puts review_params
     @review = Review.new(review_params)
     @product = Product.find(params["product_id"])
-    @review.product_id = params["product_id"]
-    @review.rating = params["rating"].to_i
-    @review.user = @current_user
     if @review.save
       flash[:success] = "Thanks for leaving a review!"
       redirect_to :back
@@ -23,11 +16,17 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to :back
+  end
+
 
 private
 
   def review_params
-    params.require(:review).permit(:description, :rating)
+    params.require(:review).permit(:description, :rating, :product_id, :user_id)
   end
 
 end
