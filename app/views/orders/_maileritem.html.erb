@@ -1,0 +1,14 @@
+
+<% if product = Product.find_by(id: line_items.product_id) %>
+  <% item_total = product.price * line_items.quantity %>
+      <p>
+      <%= image_tag product.image.tiny %>
+      <p>
+      <h4><%= product.name %></h4>
+      <p><%= product.description %></p>
+      <%= humanized_money_with_symbol product.price %>
+      <p>
+      <%= line_items.quantity %>
+      <p>
+      <%= humanized_money_with_symbol item_total %>
+<% end %>

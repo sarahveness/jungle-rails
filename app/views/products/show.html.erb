@@ -24,7 +24,7 @@
           <dd><%= @product.price %></dd>
           </dl>
       </div>
-<p>
+<p><% if logged_in? %>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
   <h5>Leave a Review</h5>
@@ -32,8 +32,11 @@
        <%= f.label :description %>
       <%= f.text_field :description, class: 'form-control' %>
       <%= f.label :rating %>
-      <%= select_tag(:rating, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]])) %>
+      <%= f.select :rating, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
       <%= submit_tag("Submit!") %>
+      <%= f.hidden_field :product_id, :value => @product.id %>
+      <%= f.hidden_field :user_id, :value => @current_user.id %>
+    <% end %>
     <% end %>
 </div>
 
@@ -41,13 +44,15 @@
           <dl class="dl-vertical">
           <dt>Product Reviews</dt>
           <p>
-          <% @product.reviews.each do |review| %>
-          <dt>Review</dt>
-          <dd><%= review.description %></dd>
-          <p>
-          <dt>Rating</dt>
-          <dd><%= review.rating %></dd>
-          <p>
+          <% @reviews.each do |review| %>
+            <dt>Review</dt>
+            <dd><%= review.description %></dd>
+            <p>
+            <dt>Rating</dt>
+            <dd><%= review.rating %></dd>
+            <% if review.user_id == @current_user.id %>
+              <%= button_to "Delete", product_review_path(@product, review), method: :delete, data: { confirm: "Are you sure?" } %>
+            <% end %>
           <% end %>
         </dl>
       </div>
