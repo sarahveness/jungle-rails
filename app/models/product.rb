@@ -15,4 +15,11 @@ class Product < ActiveRecord::Base
     quantity == 0
   end
 
+  def validations
+    errors.add(:name, "Name must not be nil")
+    errors.add(:price, "Price must not be nil")
+    errors.add(:quantity, "Quantity must not be nil")
+    errors.add(:category, "Category must be defined")
+  end
+
 end
