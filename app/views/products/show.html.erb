@@ -5,9 +5,7 @@
   </header>
 
   <article class="product-detail">
-
     <div class="row">
-
       <div class="col-sm-4">
         <%= image_tag @product.image.url, class: 'main-img' %>
       </div>
@@ -24,40 +22,39 @@
           <dd><%= @product.price %></dd>
           </dl>
       </div>
-<p><% if logged_in? %>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-  <h5>Leave a Review</h5>
-    <%= form_for [@product, @review] do |f| %>
-       <%= f.label :description %>
-      <%= f.text_field :description, class: 'form-control' %>
-      <%= f.label :rating %>
-      <%= f.select :rating, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
-      <%= submit_tag("Submit!") %>
-      <%= f.hidden_field :product_id, :value => @product.id %>
-      <%= f.hidden_field :user_id, :value => @current_user.id %>
-    <% end %>
-    <% end %>
-</div>
-
-           <div class="col-sm-6">
-          <dl class="dl-vertical">
-          <dt>Product Reviews</dt>
-          <p>
-          <% @reviews.each do |review| %>
-            <dt>Review</dt>
-            <dd><%= review.description %></dd>
-            <p>
-            <dt>Rating</dt>
-            <dd><%= review.rating %></dd>
-            <% if review.user_id == @current_user.id %>
-              <%= button_to "Delete", product_review_path(@product, review), method: :delete, data: { confirm: "Are you sure?" } %>
-            <% end %>
+    <p><% if logged_in? %>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h5>Leave a Review</h5>
+          <%= form_for [@product, @review] do |f| %>
+          <%= f.label :description %>
+          <%= f.text_field :description, class: 'form-control' %>
+          <%= f.label :rating %>
+          <%= f.select :rating, options_for_select([['1', 1], ['2', 2], ['3', 3], ['4', 4], ['5', 5]]) %>
+          <%= submit_tag("Submit!") %>
+          <%= f.hidden_field :product_id, :value => @product.id %>
+          <%= f.hidden_field :user_id, :value => @current_user.id %>
           <% end %>
-        </dl>
+        </div>
       </div>
+    <% end %>
+
+    <div class="col-sm-6">
+      <dl class="dl-vertical">
+        <dt>Product Reviews</dt>
+        <p>
+        <% @reviews.each do |review| %>
+          <dt>Review</dt>
+          <dd><%= review.description %></dd>
+          <p>
+          <dt>Rating</dt>
+          <dd><%= review.rating %></dd>
+          <% if @current_user && review.user_id == @current_user.id %>
+            <%= button_to "Delete", product_review_path(@product, review), method: :delete, data: { confirm: "Are you sure?" } %>
+          <% end %>
+        <% end %>
+      </dl>
     </div>
-
+  </div>
   </article>
-
 </section>
