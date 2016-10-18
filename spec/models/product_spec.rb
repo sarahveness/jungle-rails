@@ -16,6 +16,7 @@ RSpec.describe Product, type: :model do
         pants = Product.create(name: 'pants', price: 50, quantity: 1, category_id: 1)
         pants.update(category_id: newCategory.id)
         expect(pants).to be_persisted
+        expect(Category.count).to eql 1
     end
 
 
