@@ -31,3 +31,4 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 
 Follow this link: https://thejungleapp.herokuapp.com/
 Create an account, leave reviews for products you love (or hate), and read reviews from other users!
+:D
