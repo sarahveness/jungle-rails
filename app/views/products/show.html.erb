@@ -23,9 +23,10 @@
           </dl>
       </div>
     <p><% if logged_in? %>
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
           <h5>Leave a Review</h5>
+          <div class="panel-body">
           <%= form_for [@product, @review] do |f| %>
           <%= f.label :description %>
           <%= f.text_field :description, class: 'form-control' %>
@@ -35,26 +36,31 @@
           <%= f.hidden_field :product_id, :value => @product.id %>
           <%= f.hidden_field :user_id, :value => @current_user.id %>
           <% end %>
+          </div>
         </div>
       </div>
     <% end %>
 
-    <div class="col-sm-6">
-      <dl class="dl-vertical">
-        <dt>Product Reviews</dt>
-        <p>
-        <% @reviews.each do |review| %>
-          <dt>Review</dt>
-          <dd><%= review.description %></dd>
-          <p>
-          <dt>Rating</dt>
-          <dd><%= review.rating %></dd>
-          <% if @current_user && review.user_id == @current_user.id %>
-            <%= button_to "Delete", product_review_path(@product, review), method: :delete, data: { confirm: "Are you sure?" } %>
-          <% end %>
-        <% end %>
-      </dl>
+    <div class = "panel panel-warning">
+      <% @reviews.each do |review| %>
+        <div class = "panel-heading">
+        <p class="rating">Rating: <%= review.rating %>
+        </div>
+    <div class = "panel-body">
+      <p class="description"><%= review.description %>
+      <div class= "delete">
+      <% if @current_user && review.user_id == @current_user.id %>
+      <%= button_to "Delete", product_review_path(@product, review), method: :delete, data: { confirm: "Are you sure?"}, class: 'deletebutton' %>
+      <% end %>
+      </div>
     </div>
-  </div>
+      <% end %>
+    </div>
+
+
+
+
+
+
   </article>
 </section>

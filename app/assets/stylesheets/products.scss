@@ -84,4 +84,34 @@ main section.products-show {
   }
 }
 
+div.panel.panel-warning {
+clear: both;
+
+}
+
+div.panel.panel-danger {
+clear: both;
+width: 600px;
+margin-left: auto;
+margin-right: auto;
+color: black;
+
+}
+
+.deletebutton {
+  background-color: red;
+  border-radius: 10px;
+  width: 60px;
+  color: white;
+  margin-left: 20px;
+}
+
+.description {
+  float: left;
+
+}
+
+img.main-img {
+  margin-bottom: 50px;
+}
 
